@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply h-dvh antialiased bg-black my-0 text-base md:text-xl;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+            Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        /* text-rendering: optimizeLegibility; */
+        --command-color: #949ba4;
+        --command-shadow: rgb(187, 190, 192);
+        --command-drop: rgb(35, 161, 123);
+        --contrast: #444;
+    }
+
+    #app {
+        @apply h-dvh;
+    }
+
+    h1 {
+        @apply text-3xl font-bold text-white my-2;
+    }
+
+    input {
+        @apply bg-transparent rounded-md py-1 px-2 mb-1 last:mb-0 text-base;
+        color: var(--command-color);
+        border: 1px solid var(--contrast);
+    }
+
+    input:focus-visible {
+        outline: 2px solid var(--contrast);
+    }
+
+    input:disabled {
+        @apply bg-gray-300/15 border-transparent;
+    }
+
+    button {
+        @apply 
+            bg-slate-700 text-white py-2 px-4 block rounded-md font-semibold
+            hover:bg-blue-700 focus:bg-blue-700 !important ;
+    }
+
+    .blue {
+        --command-color: #7cb4fc;
+        --command-shadow: #89d3fd;
+        --command-drop: #14b8bd;
+        --contrast: #448;
+    }
+
+    .red {
+        --command-color: #f87171; /* red-400 */
+        --command-shadow: #f98585;
+        --command-drop: #c2234e;
+        --contrast: #844;
+    }
+
+    .green {
+        --command-color: #4ade80; /* green-400 */
+        --command-shadow: #63e292;
+        --command-drop: #1ba722;
+        --contrast: #484;
+    }
+
+    .yellow {
+        --command-color: #facc15; /* yellow-400 */
+        --command-shadow: #fed840;
+        --command-drop: #ae7f1a;
+        --contrast: #774;
+    }
+}
+
+@layer components {
+    .command-window {
+        @apply p-6 relative overflow-hidden md:rounded-[3rem];
+        filter: blur(0.3px);
+        color: var(--command-color);
+        box-shadow: inset 0 0 0 9px rgba(21,21,20,0.6),  inset 0 1px 80px 5px rgba(0,0,0,0.97);
+        background-color: #162030;
+        text-shadow: var(--command-shadow) 0 -1px 35px;
+    }
+
+    /* Scan effect */
+    .command-window:before {
+        @apply absolute top-0 left-0  w-full h-[20%] pointer-events-none;
+        content: "";
+        background: linear-gradient(180deg, rgba(40,66,25,0.2) 0%, rgba(32,57,17,0) 70%, rgba(28,53,13,0) 99%);
+        animation: 6.5s 1.0s infinite ease-in-out forwards scan;
+    }
+
+    /* Scan lines */
+    .command-window:after {
+        @apply absolute top-0 left-0  w-full h-full pointer-events-none;
+        content:"";
+        opacity: 1;
+        background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAECAYAAABP2FU6AAAAE0lEQVQIHWP4//8/AxMDFMiDWQA2wAMhzy0v7QAAAABJRU5ErkJggg==) repeat;
+        filter: drop-shadow(15.32px 2.18px 7.35px var(--command-drop));
+    }
+
+    /*Animations*/
+    @keyframes scan {
+        from { top: -50%; left: 0; }
+        to { top: 150%; left: 0; }
+    }
+}
