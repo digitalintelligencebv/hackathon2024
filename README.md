@@ -1,6 +1,3 @@
 # Hackathon 2024
 
-W.I.P.
-
-Go to ... !
-Use `help` for the list of commands.
+Go to [this page](https://digitalintelligencebv.github.io/hackathon2024/) to use this tool and open the safe. Good luck!
