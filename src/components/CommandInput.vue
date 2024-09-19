@@ -74,7 +74,7 @@ const tabText = ref('');
 const onTab = (e: Event) => {
   e.preventDefault();
 
-  const text = input.value?.value;
+  const text = command.value;
 
   if (!text) {
     return;
@@ -101,7 +101,7 @@ const onTab = (e: Event) => {
     tabLevel.value = Math.min(matchingCommands.length - 1, tabLevel.value + 1);
   }
 
-  input.value.value = matchingCommands[tabLevel.value];
+  command.value = matchingCommands[tabLevel.value];
 };
 
 const onInput = () => {
