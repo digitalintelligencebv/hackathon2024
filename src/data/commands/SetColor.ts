@@ -8,6 +8,7 @@ export const setColor = new Command(
   async (args, state, logger) => {
     if (args.length < 1) {
       logger('ERROR: Color argument missing.');
+      return;
     }
 
     const colorArg = args[0];
