@@ -18,7 +18,7 @@
     }
 
     h1 {
-        @apply text-3xl font-bold text-white/90 my-2;
+        @apply text-3xl md:text-5xl font-bold text-white/90 my-2;
     }
 
     input {

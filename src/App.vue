@@ -9,7 +9,7 @@
   >
     <h1 class="text-center mb-auto">
       <span>Hackathon 2024</span>
-      <span class="ml-1 text-xs">alpha-0.0.1</span>
+      <span class="ml-1 text-xs md:text-sm">alpha-0.0.1</span>
     </h1>
 
     <CompletedResult
