@@ -78,7 +78,7 @@
     .command-window:before {
         @apply absolute top-0 left-0  w-full h-[20%] pointer-events-none;
         content: "";
-        background: linear-gradient(180deg, rgba(40,66,25,0.2) 0%, rgba(32,57,17,0) 70%, rgba(28,53,13,0) 99%);
+        background: linear-gradient(0deg, rgba(40,66,25,0.2) 0%, rgba(32,57,17,0) 70%, rgba(28,53,13,0) 99%);
         animation: 6.5s 1.0s infinite ease-in-out forwards scan;
     }
 
