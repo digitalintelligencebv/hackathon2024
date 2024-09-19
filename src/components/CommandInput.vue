@@ -15,12 +15,14 @@
       :placeholder
       @keyup.up="onUp"
       @keyup.down="onDown"
+      @keydown.tab="onTab"
       @input="onInput"
     />
   </form>
 </template>
 
 <script setup lang="ts">
+import { getCommands } from '@/data/Commands';
 import { computed, ref, useTemplateRef } from 'vue';
 
 const props = defineProps<{
@@ -66,8 +68,46 @@ const onDown = () => {
   }
 };
 
+const tabLevel = ref(-1);
+const tabText = ref('');
+
+const onTab = (e: Event) => {
+  e.preventDefault();
+
+  const text = input.value?.value;
+
+  if (!text) {
+    return;
+  }
+
+  if (!tabText.value) {
+    tabText.value = text;
+  }
+
+  const matchingCommands = getCommands()
+    .map(c => c.key)
+    .filter(c => c.startsWith(tabText.value))
+    .sort();
+
+  if (!matchingCommands.length) {
+    tabLevel.value = -1;
+    tabText.value = '';
+    return;
+  }
+
+  if (tabLevel.value === matchingCommands.length - 1) {
+    tabLevel.value = 0;
+  } else {
+    tabLevel.value = Math.min(matchingCommands.length - 1, tabLevel.value + 1);
+  }
+
+  input.value.value = matchingCommands[tabLevel.value];
+};
+
 const onInput = () => {
   upLevel.value = 0;
+  tabLevel.value = -1;
+  tabText.value = '';
 };
 
 const placeholder = computed(() => props.history.length ? '' : 'Type a command or `help`.');
