@@ -10,7 +10,7 @@ export async function runCommand(input: string, state: State, logger: Logger) {
   for (const command of getCommands()) {
     if (command.match(input)) {
       if (state.fileCorruption >= 100 && (command.category !== utilityCategory && command !== repairFiles)) {
-        logger(`ERROR: Command '${command.key} unavailable due to corrupted files.'`);
+        logger(`ERROR: Command '${command.key}' unavailable due to corrupted files.`);
         return;
       }
 
