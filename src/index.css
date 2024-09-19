@@ -22,7 +22,7 @@
     }
 
     input {
-        @apply bg-transparent rounded-md py-1 px-2 mb-1 last:mb-0 text-base;
+        @apply bg-transparent rounded-md py-1 px-2 mb-1 last:mb-0;
         color: var(--command-color);
         border: 1px solid var(--contrast);
     }

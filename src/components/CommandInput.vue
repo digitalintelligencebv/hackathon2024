@@ -1,10 +1,14 @@
 <template>
-  <form @submit="onSubmit">
+  <form
+    class="relative"
+    @submit="onSubmit"
+  >
+    <span class="absolute top-0 bottom-0 left-0 p-1 pl-[calc(0.5rem_+_1px)]">></span>
     <input
       id="command-input"
       ref="input"
       v-model="command"
-      class="w-full"
+      class="w-full pl-[calc(1.75rem_+_1px)]"
       :disabled
       autocapitalize="false"
       autocomplete="off"
