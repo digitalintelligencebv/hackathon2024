@@ -1,6 +1,6 @@
 import { Command } from '@/models/Command';
 import { bugFixCategory } from '../CommandCategories';
-import { delay } from '@/Utils';
+import { delay, registerState } from '@/Utils';
 
 export const connectToMainframe = new Command(
   'connect-to-mainframe',
@@ -13,6 +13,14 @@ export const connectToMainframe = new Command(
       logger('Passsword invalid.');
       return;
     }
+
+    if (!state.id.includes('-')) {
+      state.id += `-${args[0]}`;
+    } else {
+      state.id = state.id.replace(/-.*/, `-${args[0]}`);
+    }
+
+    await registerState(state);
 
     logger('Successfully connected!');
 

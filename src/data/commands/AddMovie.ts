@@ -1,6 +1,6 @@
 import { Command } from '@/models/Command';
 import { Color } from '@/models/Color';
-import { padTo } from '@/Utils';
+import { padTo, registerState } from '@/Utils';
 import { getBlob } from '../Blob';
 import { mainCategory } from '../CommandCategories';
 import { showResults } from './ShowResults';
@@ -42,6 +42,8 @@ export const addMovie = new Command(
             name: fullArgument,
             code,
           });
+
+          await registerState(state);
         }
 
         return;

@@ -48,6 +48,7 @@ import CompletedResult from './components/CompletedResult.vue';
 import { runCommand } from './data/RunCommand';
 import { getColorClass } from './models/Color';
 import type { State } from './models/State';
+import { registerState } from './Utils';
 
 const commandHistory = ref<string[]>(JSON.parse(localStorage.getItem('history') ?? '[]'));
 const log = ref(localStorage.getItem('log') ?? '');
@@ -80,15 +81,24 @@ const loadState = () => {
   }
 };
 
-const state = reactive<State>(loadState() ?? {
-  color: undefined,
-  movies: [],
-  rotation: 0,
-  blur: 0,
-  fileCorruption: 0,
-  connected: false,
-  completed: false,
-});
+let isFirstView = false;
+
+const getInitialState = () => {
+  isFirstView = true;
+
+  return {
+    id: Math.random().toString().substring(2),
+    color: undefined,
+    movies: [],
+    rotation: 0,
+    blur: 0,
+    fileCorruption: 0,
+    connected: false,
+    completed: false,
+  } satisfies State;
+};
+
+const state = reactive<State>(loadState() ?? getInitialState());
 
 watch(state, newState => {
   localStorage.setItem('state', JSON.stringify(newState));
@@ -111,9 +121,13 @@ const onRun = async (command: string) => {
   isRunning.value = false;
 };
 
-onMounted(() => {
+onMounted(async () => {
   scrollLogToBottom();
   input.value?.focus();
+
+  if (isFirstView) {
+    await registerState(state);
+  }
 });
 
 watch(isRunning, newIsRunning => {

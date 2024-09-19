@@ -1,6 +1,7 @@
 import { Color } from './Color';
 
 export interface State {
+  id: string;
   color?: Color;
   movies: Movie[];
   rotation: number;
